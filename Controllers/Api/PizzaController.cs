@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using System.Data.Entity;
 
 namespace la_mia_pizzeria_post.Controllers.Api
 {
@@ -14,12 +15,29 @@ namespace la_mia_pizzeria_post.Controllers.Api
         {
             _context = new Context();
         }
-        public IActionResult Get()
+        [HttpGet]
+        public IActionResult Get(string? name)
         {
-            List<Pizza> pizzaList = _context.Pizza.ToList();
+            IQueryable<Pizza> pizzas;
+            if (name != null)
+            {
+                pizzas = _context.Pizza.Include("Category").Include("Ingredients").Where(pizza => pizza.Nome.ToLower().Contains(name.ToLower()));
 
+            }
+            else
+            {
+                pizzas = _context.Pizza.Include("Category").Include("Ingredients");
+            }
 
-            return Ok(pizzaList);
+            return Ok(pizzas.ToList<Pizza>());
+
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            Pizza pizza = _context.Pizza.Where(piz => piz.Id == id).FirstOrDefault();
+            return Ok(pizza);
         }
     }
 }

@@ -1,15 +1,19 @@
 ﻿
 @model List<Pizza>
 
-
+<div>
+    <input type="text" class="form-control js_search" placeholder="Cerca per nome...">
+</div>
 
 <table class="table container">
+    
     <thead>
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Nome</th>
             <th scope="col">Foto</th>
             <th scope="col">Prezzo</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody id="tableBody">
@@ -21,28 +25,51 @@
 </table>
 
 <script type="text/javascript">
+   
+    GetPizza("");
+    document.querySelector(".js_search").addEventListener('keyup', searchPizza);
 
-    axios.get('/api/pizza/get')
-    .then(r => {
+
+    function searchPizza() {
+        let name = this.value;
+        //controlli
+        GetPizza(name);
+    }
+
+    function GetPizza(name) {
+
+        axios.get('/api/pizza/get', {
+            params: {
+                name: name
+            }
+        }).then(r => {
             console.log(r.data);
             document.getElementById('tableBody').innerHTML = '';
-            r.data.forEach(pizza =>{
-                document.getElementById('tableBody').innerHTML += 
-                `
-                    <tr>
-                    <td>${pizza.id}</td>
-                    <td> ${pizza.nome}</td>
-                        <td> <img src="${pizza.image}"></td>
-                    <td> ${pizza.prezzo} &euro; </td>
-                    </tr>
-                `;
+            r.data.forEach(pizza => {
+                document.getElementById('tableBody').innerHTML +=
+                    `
+                            <tr>
+                            <td>${pizza.id}</td>
+                            <td> ${pizza.nome}</td>
+
+                            <td> <img src="${pizza.image}"></td>
+                            <td> ${pizza.prezzo} &euro; </td>
+
+                            <td>
+                                <a class="btn btn-primary" href="/Home/Details/${pizza.id}">Dettagli</a>
+                            </td>
+                            </tr>
+                        `;
             })
 
-        
-    })
-    //.cath(e =>{
-    //    console.log(e);
-    //});
+
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+
+   
+    
     
 </script>
 

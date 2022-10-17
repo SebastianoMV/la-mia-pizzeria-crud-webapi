@@ -15,6 +15,10 @@ namespace la_mia_pizzeria_post.Controllers
             List<Pizza> pizzaList = _context.Pizza.Include("Category").Include("Ingredients").ToList();
             return View(pizzaList);
         }
-    
+
+        public IActionResult Details(int id)
+        {
+            return View();
+        }
     }
 }

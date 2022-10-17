@@ -1,0 +1,38 @@
+﻿
+@model List<Pizza>
+
+<div class="js_card m-auto">
+    
+</div>
+
+<script type="text/javascript">
+   
+    let id = window.location.pathname.split('/')[3];
+
+    
+
+        axios.get('/api/pizza/get/' + id ).then(r => {
+            const pizza = r.data;
+            document.querySelector('.js_card').innerHTML = '';
+            
+                document.querySelector('.js_card').innerHTML +=
+                    `
+                            <div class="card m-auto" style="width: 18rem;">
+                                <img src="${pizza.image}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">${pizza.nome}</h5>
+                                    <p class="card-text">${pizza.descrizione}</p>
+                                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                    `;
+        }).catch(e => {
+            console.log(e);
+        });
+    
+
+   
+    
+    
+</script>
+
