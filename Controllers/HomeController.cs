@@ -20,5 +20,10 @@ namespace la_mia_pizzeria_post.Controllers
         {
             return View();
         }
+
+        public IActionResult Contacts()
+        {
+            return View();
+        }
     }
 }

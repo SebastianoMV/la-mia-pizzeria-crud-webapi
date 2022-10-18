@@ -22,7 +22,8 @@ namespace la_mia_pizzeria_post.Models
         public DbSet<Pizza> Pizza { get; set; }
 
         public DbSet<Ingredient> Ingredient { get; set; }
-        
+        public DbSet<Message> Messages { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=pizzeria-db;Integrated Security=True");

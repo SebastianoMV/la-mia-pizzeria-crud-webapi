@@ -119,6 +119,12 @@ namespace la_mia_pizzeria_post.Controllers
             _context.Add(pizza);
             _context.SaveChanges();
         }
-       
+
+        public IActionResult Messages()
+        {
+            List<Message> messageList = _context.Messages.ToList();
+            return View(messageList);
+        }
+
     }
 }
