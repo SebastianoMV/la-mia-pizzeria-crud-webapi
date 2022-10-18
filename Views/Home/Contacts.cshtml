@@ -4,14 +4,14 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <form onsubmit="SendMessage(event)">
+            <form onsubmit="SendMessage(event)" id="messageForm">
                 <div class="mb-3">
                     <label for="contact-email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="contact-email">
                 </div>
                 <div class="mb-3">
                     <label for="contact-name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="contact-name">
+                    <input type="text" class="form-control " id="contact-name">
                 </div>
                 <div class="mb-3">
                     <label for="contact-title" class="form-label">Titolo</label>
@@ -31,7 +31,6 @@
 <script type="text/javascript">
 
     function SendMessage(e) {
-        
         e.preventDefault();
         axios.post("/api/message/send", {
             email: document.querySelector('#contact-email').value,
@@ -46,7 +45,37 @@
             alert('Messaggio inviato correttamente');
         }).catch(err => {
             console.log(err);
-            alert('Dati non validi, riprova');
+            
+            if (document.querySelector('#contact-email').value == "") {
+                document.querySelector("#contact-email").classList.add("is-invalid");
+                errors = true;
+            } else {
+                document.querySelector("#contact-email").classList.remove("is-invalid");
+            }
+
+            if (document.querySelector('#contact-name').value == "") {
+                document.querySelector("#contact-name").classList.add("is-invalid");
+                errors = true;
+            } else {
+                document.querySelector("#contact-name").classList.remove("is-invalid");
+            }
+
+            if (document.querySelector('#contact-title').value == "") {
+                document.querySelector("#contact-title").classList.add("is-invalid");
+                errors = true;
+            } else {
+                document.querySelector("#contact-title").classList.remove("is-invalid");
+            }
+
+            if (document.querySelector('#contact-text').value == "") {
+                document.querySelector("#contact-text").classList.add("is-invalid");
+                errors = true;
+            } else {
+                document.querySelector("#contact-text").classList.remove("is-invalid");
+            }
+
+
+
         })
 
     }
