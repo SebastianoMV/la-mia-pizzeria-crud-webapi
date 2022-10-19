@@ -57,7 +57,10 @@
 
                             <td>
                                 <a class="btn btn-primary" href="/Home/Details/${pizza.id}">Dettagli</a>
+                                    <a style="text-decoration:none;" href="@Url.Action("Update", "Home")"">Updatr</a>
+                                <button onclick="deletePizza(${pizza.id})">Click me</button>
                             </td>
+                        
                             </tr>
                         `;
             })
@@ -67,7 +70,16 @@
             console.log(e);
         });
     }
+    
+    function deletePizza(id) {
+        console.log('dentro');
+        axios.get('/api/pizza/delete/' + id).then(r => {
 
+            GetPizza("");
+        }).catch(e => {
+            console.log(e);
+        });
+    }
    
     
     

@@ -59,7 +59,7 @@
         } else {
             document.querySelector("#contact-text").classList.remove("is-invalid");
         }
-        if(errors == false){
+        if(errors == false){ 
             SendMessage(e);
         }
     }
@@ -78,36 +78,7 @@
             alert('Messaggio inviato correttamente');
         }).catch(err => {
             console.log(err);
-            
-            //if (document.querySelector('#contact-email').value == "") {
-            //    document.querySelector("#contact-email").classList.add("is-invalid");
-            //    errors = true;
-            //} else {
-            //    document.querySelector("#contact-email").classList.remove("is-invalid");
-            //}
-
-            //if (document.querySelector('#contact-name').value == "") {
-            //    document.querySelector("#contact-name").classList.add("is-invalid");
-            //    errors = true;
-            //} else {
-            //    document.querySelector("#contact-name").classList.remove("is-invalid");
-            //}
-
-            //if (document.querySelector('#contact-title').value == "") {
-            //    document.querySelector("#contact-title").classList.add("is-invalid");
-            //    errors = true;
-            //} else {
-            //    document.querySelector("#contact-title").classList.remove("is-invalid");
-            //}
-
-            //if (document.querySelector('#contact-text').value == "") {
-            //    document.querySelector("#contact-text").classList.add("is-invalid");
-            //    errors = true;
-            //} else {
-            //    document.querySelector("#contact-text").classList.remove("is-invalid");
-            //}
-
-
+            alert('Messaggio errato');
 
         })
 

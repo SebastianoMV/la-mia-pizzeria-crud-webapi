@@ -1,0 +1,47 @@
+﻿@model Pizza;
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form onsubmit="Update(event)" id="messageForm">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="nome" id="">
+                </div>
+                <div class="mb-3">
+                    <label for="desc" class="form-label">Descrizione</label>
+                    <input type="text" class="" id="desc">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Immagine</label>
+                    <input type="text" class="f" id="image">
+                </div>
+                <div class="mb-3">
+                    <label for="prez" class="form-label">Prezzo</label>
+                    <input type="number" class="f" id="prez">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Invia" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function Update(e) {
+        e.preventDefault();
+        axios.post("/api/pizza/put", {
+            nome: document.querySelector('#nome').value,
+            descrizione: document.querySelector('#desc').value,
+            image: document.querySelector('#image').value,
+            prezzo: document.querySelector('#prez').value,
+        }).then(res => {
+            
+            alert('Messaggio inviato correttamente');
+        }).catch(err => {
+            console.log(err);
+            alert('Messaggio errato');
+
+        })
+
+    }
+</script>

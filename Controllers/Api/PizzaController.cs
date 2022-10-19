@@ -39,5 +39,48 @@ namespace la_mia_pizzeria_post.Controllers.Api
             Pizza pizza = _context.Pizza.Where(piz => piz.Id == id).FirstOrDefault();
             return Ok(pizza);
         }
+
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Pizza model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+            
+                
+                Pizza pizzaSearch = _context.Pizza
+                .Where(pizza => pizza.Id == id).FirstOrDefault();
+                if (pizzaSearch != null)
+                {
+                    return Ok(pizzaSearch);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            
+            
+                Pizza pizzaDelete = _context.Pizza
+                .Where(pizza => pizza.Id == id).FirstOrDefault();
+                if (pizzaDelete != null)
+                {
+                    _context.Pizza.Remove(pizzaDelete);
+                    _context.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            
+        }
     }
 }
